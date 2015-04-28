@@ -1,0 +1,17 @@
+{
+	"name":	"crazedsanity/hobbitwalk",
+	"type": "library",
+	"description": "Libraries for Project Hobbit Walk",
+	"keywords": ["php", "website"],
+	"homepage": "http://bit.ly/hobbitwalk",
+	"license": "GPL-2.0+",
+	"authors": [
+		{
+			"name":	"Dan Falconer",
+			"email": "github@crazedsanity.com",
+			"homepage": "http://www.crazedsanity.com",
+			"role": "Developer"
+		}
+	],
+	"minimum-stability": "dev"
+}
