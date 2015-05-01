@@ -1,14 +1,12 @@
 <?php
 
 /* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Licensed under GNU General Public License v2.0+.
+ * See associated LICENSE file for full license text.
  */
 
-require_once(__DIR__ .'/../lib/includes.php');
-require_once(__DIR__ .'/../lib/hobbitwalk/csv.class.php');
-require_once(__DIR__ .'/../lib/hobbitwalk/data.class.php');
+require_once(__DIR__ .'/../csv.class.php');
+require_once(__DIR__ .'/../data.class.php');
 
 /*
  * Step 1: pull user's settings from the database.

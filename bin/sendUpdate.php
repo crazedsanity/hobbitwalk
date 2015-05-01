@@ -1,15 +1,13 @@
 <?php
 
+/* 
+ * Licensed under GNU General Public License v2.0+.
+ * See associated LICENSE file for full license text.
+ */
 
 require_once(__DIR__ .'/../lib/hobbitwalk/main.class.php');
-require_once(__DIR__ .'/../lib/includes.php');
 //require_once(__DIR__ .'/../vendor/crazedsanity/core/AutoLoader.class.php');
 
-AutoLoader::registerDirectory(dirname(__FILE__) .'/../vendor/crazedsanity/core');
-
-require_once(__DIR__ .'/../vendor/crazedsanity/core/ToolBox.class.php');
-require_once(__DIR__ .'/../vendor/crazedsanity/template/interfaces/iTemplate.interface.php');
-require_once(__DIR__ .'/../vendor/crazedsanity/template/Template.class.php');
 
 use \crazedsanity\ToolBox;
 //use \crazedsanity\Template;

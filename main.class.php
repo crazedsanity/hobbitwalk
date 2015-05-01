@@ -151,6 +151,9 @@ class main {
 		
 		// now send an email to each person.
 		foreach($people as $username => $email) {
+			if(constant('HW_OVERRIDE_EMAIL')) {
+				$email = constant('HW_OVERRIDE_EMAIL');
+			}
 			$mainTmpl->addVar('salutation', $username);
 			$this->sendEmail(
 					$email,
@@ -171,9 +174,8 @@ class main {
 		$m->Host = "localhost";
 		$m->From = 'crazedsanity.com+hobbitwalk@gmail.com';
 		$m->FromName = "Project Hobbit Walk";
-//		$m->addAddress($to, $toName);
+		$m->addAddress($to, $toName);
 		$m->ContentType = "text/plain";
-		$m->addBCC('dan.falconer+hobbitwalk@gmail.com');//for keeping track of what was sent...
 		
 		$m->Subject = $subject;
 		$m->Body = $body;
