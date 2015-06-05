@@ -9,7 +9,7 @@
 namespace crazedsanity\walk;
 
 use Exception;
-use crazedsanity\ToolBox;
+use crazedsanity\core\ToolBox;
 
 /**
  * Description of map
@@ -121,7 +121,7 @@ class main {
 	}
 	
 	
-	public function parseUpdateMessage($raceId, \crazedsanity\Template $mainTmpl, \crazedsanity\Template $rowTmpl) {
+	public function parseUpdateMessage($raceId, \crazedsanity\template\Template $mainTmpl, \crazedsanity\template\Template $rowTmpl) {
 		if(!is_array($this->_races) || !count($this->_races)) {
 			$this->_races = $this->getAllRaces();
 //			ToolBox::debug_print($this->_races,1);
@@ -151,7 +151,7 @@ class main {
 		
 		// now send an email to each person.
 		foreach($people as $username => $email) {
-			if(constant('HW_OVERRIDE_EMAIL')) {
+			if(defined('HW_OVERRIDE_EMAIL')) {
 				$email = constant('HW_OVERRIDE_EMAIL');
 			}
 			$mainTmpl->addVar('salutation', $username);

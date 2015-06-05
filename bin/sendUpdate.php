@@ -8,7 +8,8 @@
 require_once(__DIR__ .'/../main.class.php');
 
 
-use \crazedsanity\ToolBox;
+use crazedsanity\core\ToolBox;
+use crazedsanity\template\Template;
 
 ToolBox::$debugPrintOpt = 1;
 
@@ -23,7 +24,7 @@ $allRaces = $hw->getAllRaces();
 foreach($allRaces as $raceId=>$o) {
 	$_stats = $hw->parseUpdateMessage(
 			$raceId, 
-			new \crazedsanity\Template(__DIR__ .'/../templates/content/hw_updateEmail.tmpl'),
-			new \crazedsanity\Template(__DIR__ .'/../templates/content/hw_updateEmail-dataRow.tmpl')
+			new Template(TMPLDIR .'/content/hw_updateEmail.tmpl'),
+			new Template(TMPLDIR .'/content/hw_updateEmail-dataRow.tmpl')
 		);
 }
