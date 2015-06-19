@@ -5,19 +5,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-namespace crazedsanity\walk;
+
+namespace crazedsanity\hobbitwalk;
 
 /**
- * Description of participant
+ * Description of race
  *
  * @author danf
  */
-class participant {
-    public function __construct($uid) {
-        
-    }
-    
-    public function create($uid, $raceId) {
-        
-    }
+class race {
+    //put your code here
 }

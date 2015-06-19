@@ -5,14 +5,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-namespace crazedsanity\walk;
+namespace crazedsanity\hobbitwalk;
 
 /**
- * Description of mapMilestone
+ * Description of participant
  *
  * @author danf
  */
-class mapMilestone {
-    //put your code here
+class participant {
+    public function __construct($uid) {
+        
+    }
+    
+    public function create($uid, $raceId) {
+        
+    }
 }

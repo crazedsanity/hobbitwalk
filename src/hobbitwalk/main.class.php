@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace crazedsanity\walk;
+namespace crazedsanity\hobbitwalk;
 
 use Exception;
 use crazedsanity\core\ToolBox;

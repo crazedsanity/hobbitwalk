@@ -6,13 +6,13 @@
  * and open the template in the editor.
  */
 
-namespace crazedsanity\walk;
+namespace crazedsanity\hobbitwalk;
 
 /**
- * Description of race
+ * Description of mapMilestone
  *
  * @author danf
  */
-class race {
+class mapMilestone {
     //put your code here
 }

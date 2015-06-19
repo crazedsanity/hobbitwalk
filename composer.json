@@ -13,5 +13,11 @@
 			"role": "Developer"
 		}
 	],
-	"minimum-stability": "dev"
+	"autoload": {
+		"classmap": ["src/"]
+	},
+	"minimum-stability": "dev",
+	"require": {
+		"crazedsanity/core": "~0.2.1"
+	}
 }
