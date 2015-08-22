@@ -54,4 +54,10 @@ class data {
         
         return $db->run_update($sql, $data);
     }
+	
+	
+	
+	static function getUserData() {
+		
+	}
 }

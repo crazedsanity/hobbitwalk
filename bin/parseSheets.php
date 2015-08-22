@@ -5,9 +5,6 @@
  * See associated LICENSE file for full license text.
  */
 
-require_once(__DIR__ .'/../csv.class.php');
-require_once(__DIR__ .'/../data.class.php');
-
 /*
  * Step 1: pull user's settings from the database.
  * Step 2: retrieve user's CSV
@@ -17,7 +14,7 @@ require_once(__DIR__ .'/../data.class.php');
 
 $db = new \cs_phpDB(constant('DB_DSN'),constant('DB_USERNAME'),constant('DB_PASSWORD'));
 
-$csv = new crazedsanity\walk\csv($db);
+$csv = new crazedsanity\hobbitwalk\csv($db);
 
 //
 
@@ -39,7 +36,7 @@ foreach($allUsers as $uid=>$data) {
 	$insertedRows = 0;
 	foreach($allData as $lineData) {
 		try {
-			\crazedsanity\walk\data::create($db, $uid, 
+			\crazedsanity\hobbitwalk\data::create($db, $uid, 
 				$lineData['date'], $lineData['steps'], $lineData['distance']);
 			$insertedRows++;
 		}

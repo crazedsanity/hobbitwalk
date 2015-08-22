@@ -97,17 +97,4 @@ class csv {
 		
 		return $allData;
 	}
-
-	
-	public function getUserData() {
-		$sql = "SELECT b.username, a.* FROM ". self::TABLE . " AS a INNER JOIN cs_authentication_table AS b USING (uid) ORDER BY csv_id";
-		if($this->db->run_query($sql)) {
-			$data = $this->db->farray_fieldnames('uid');
-		}
-		else {
-			throw new \Exception("no records while attempting to retrieve data");
-		}
-		
-		return($data);
-	}
 }
