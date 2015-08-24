@@ -21,13 +21,14 @@ class csv {
 	const TABLE = 'hw_csv_table';
 	const KEY = 'csv_id';
 	const SEQ = 'hw_csv_table_csv_id_seq';
+	const DATEFORMAT = 'Y-m-d';
 	
 	public function __construct($db) {
 		$this->db = $db;
 	}
 	
 	
-	public function parseLine(array $data, $distCol, $dateCol, $dateFormat, $stepsCol, $distFormat) {
+	public static function parseLine(array $data, $distCol, $dateCol, $dateFormat, $stepsCol, $distFormat) {
 		if(isset($data[$distCol]) && is_numeric($data[$distCol])) {
 			$theDistance = $data[$distCol];
 		}
@@ -37,7 +38,7 @@ class csv {
 		if(isset($data[$dateCol]) && strlen($data[$dateCol])) {
 			$dateObject = date_create_from_format($dateFormat, $data[$dateCol]);
 			if(is_a($dateObject, 'DateTime')) {
-				$theDate = date_format($dateObject, 'Y-m-d');
+				$theDate = date_format($dateObject, self::DATEFORMAT);
 			}
 			else {
 				throw new \Exception("date column is not in the expected format, "
