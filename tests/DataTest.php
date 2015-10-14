@@ -28,6 +28,79 @@ class TestOfCsv extends crazedsanity\database\TestDbAbstract {
 	
 	
 	
+	
+	//-------------------------------------------------------------------------
+	public function test_parseDate() {
+		$dateList = array(
+			'd/Y/m'		=> '22/2015/01',
+			'Y/m/d'		=> '2015/01/22',
+			'd/m/Y'		=> '22/01/2015',
+			'm/d/Y'		=> '01/22/2015',
+		);
+		
+		foreach($dateList as $format=>$date) {
+			$this->assertEquals('2015-01-22', crazedsanity\hobbitwalk\csv::parseDate($date, $format));
+		}
+	}
+	//-------------------------------------------------------------------------
+	
+	
+	
+	//-------------------------------------------------------------------------
+	/**
+	 * @expectedException Exception
+	 * @expectedExceptionMessage date column is not in the expected format
+	 */
+	public function test_parseDate_exception() {
+		crazedsanity\hobbitwalk\csv::parseDate('20,15/01/01', 'Y/m/d');
+	}
+	//-------------------------------------------------------------------------
+	
+	
+	
+	//-------------------------------------------------------------------------
+	/**
+	 * @expectedException InvalidArgumentException
+	 * @expectedExceptionMessage date appears to be invalid
+	 */
+	public function test_parseDate_empty() {
+		crazedsanity\hobbitwalk\csv::parseDate(null, 'Y/m/d');
+	}
+	//-------------------------------------------------------------------------
+	
+	
+	
+	//-------------------------------------------------------------------------
+	public function test_parseDistance() {
+		$this->assertEquals(1, crazedsanity\hobbitwalk\csv::parseDistance(1));
+		$this->assertEquals(1, crazedsanity\hobbitwalk\csv::parseDistance(1, 'mi'));
+		$this->assertEquals(5.01, crazedsanity\hobbitwalk\csv::parseDistance(3.11, crazedsanity\hobbitwalk\csv::DISTANCE_FORMAT_KILOMETERS));
+		$this->assertEquals(5.01, crazedsanity\hobbitwalk\csv::parseDistance(3.11, 'km'));
+	}
+	//-------------------------------------------------------------------------
+	
+	
+	
+	//-------------------------------------------------------------------------
+	/**
+	 * @expectedException InvalidArgumentException
+	 * @expectedExceptionMessage distance appears to be invalid
+	 */
+	public function test_parseDistance_exception() {
+		crazedsanity\hobbitwalk\csv::parseDistance(null, null);
+	}
+	//-------------------------------------------------------------------------
+	
+	
+	
+	//-------------------------------------------------------------------------
+	public function test_parseSteps() {
+		$this->assertEquals(123456, crazedsanity\hobbitwalk\csv::parseSteps(123456, null));
+	}
+	//-------------------------------------------------------------------------
+	
+	
+	
 	//-------------------------------------------------------------------------
 	public function test_parseLine() {
 		$data = array(

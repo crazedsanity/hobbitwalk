@@ -18,7 +18,7 @@
 	},
 	"minimum-stability": "dev",
 	"require": {
-		"crazedsanity/core": "~0.2.1",
-		"crazedsanity/database": "dev-master"
+		"crazedsanity/template": "^0.2",
+		"crazedsanity/database": "^0.2"
 	}
 }

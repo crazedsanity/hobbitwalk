@@ -7,7 +7,7 @@
  */
 namespace crazedsanity\hobbitwalk;
 
-use \cs_global;
+use crazedsanity\core\ToolBox;
 
 /**
  * Description of csv
@@ -29,42 +29,9 @@ class csv {
 	
 	
 	public static function parseLine(array $data, $distCol, $dateCol, $dateFormat, $stepsCol, $distFormat) {
-		if(isset($data[$distCol]) && is_numeric($data[$distCol])) {
-			$theDistance = $data[$distCol];
-		}
-		else {
-			throw new \Exception("distance column contains invalid data");
-		}
-		if(isset($data[$dateCol]) && strlen($data[$dateCol])) {
-			$dateObject = date_create_from_format($dateFormat, $data[$dateCol]);
-			if(is_a($dateObject, 'DateTime')) {
-				$theDate = date_format($dateObject, self::DATEFORMAT);
-			}
-			else {
-				throw new \Exception("date column is not in the expected format, "
-						. "expected=(". $dateFormat ."), raw data=(". 
-						$data[$dateCol] .")");
-			}
-		}
-		else {
-			throw new \Exception('date column contains invalid data');
-		}
-		
-		if(isset($data[$stepsCol]) && is_numeric($data[$stepsCol])) {
-			$theSteps = $data[$stepsCol];
-			if($theDistance >= ($theSteps/1000)) {
-				throw new \ErrorException("user must be a giant, steps (". 
-						$data[$stepsCol] .") are too close to "
-						. "distance (". $data[$distCol] .")");
-			}
-		}
-		else {
-			throw new \Exception("distance column has invalid data.. ". cs_global::debug_print($data,0));
-		}
-		
-		if($distFormat == self::DISTANCE_FORMAT_KILOMETERS) {
-			$theDistance = $theDistance * 1.60934;
-		}
+		$theDistance = self::parseDistance($data[$distCol], $distFormat);
+		$theDate = self::parseDate($data[$dateCol], $dateFormat);
+		$theSteps = self::parseSteps($data[$stepsCol], $theDistance);
 		
 		$returnData = array(
 			'date'		=> $theDate,
@@ -73,6 +40,57 @@ class csv {
 		);
 		
 		return $returnData;
+	}
+	
+	
+	public static function parseDate($date, $dateFormat) {
+		if(isset($date) && strlen($date)) {
+			$dateObject = date_create_from_format($dateFormat, $date);
+			if(is_a($dateObject, 'DateTime')) {
+				$theDate = date_format($dateObject, self::DATEFORMAT);
+			}
+			else {
+				throw new \Exception("date column is not in the expected format, "
+						. "expected=(". $dateFormat ."), raw data=(". 
+						$date .")");
+			}
+		}
+		else {
+			throw new \InvalidArgumentException('date appears to be invalid ('. $date .')');
+		}
+		
+		return $theDate;
+	}
+	
+	
+	public static function parseDistance($dist, $format=null) {
+		if(isset($dist) && is_numeric($dist)) {
+			$theDistance = $dist;
+			if($format == self::DISTANCE_FORMAT_KILOMETERS) {
+				$theDistance = number_format(($theDistance * 1.60934), 2);
+			}
+		}
+		else {
+			throw new \InvalidArgumentException("distance appears to be invalid (".  $dist .")");
+		}
+		
+		return $theDistance;
+	}
+	
+	
+	public static function parseSteps($steps, $distance) {
+		if(isset($steps) && is_numeric($steps)) {
+			if($distance >= ($steps/1000)) {
+				throw new \ErrorException("user must be a giant, steps (". 
+						$steps .") are too close to "
+						. "distance (". $distance .")");
+			}
+		}
+		else {
+			throw new \Exception("distance column has invalid data... steps=(". $steps ."), distance=(". $distance .").. ");
+		}
+		
+		return $steps;
 	}
 	
 	
@@ -91,7 +109,9 @@ class csv {
 				$allData[] = $one;
 			}
 			catch(\Exception $e) {
-//				\cs_global::debug_print($e,1);
+//				if($counter > 0) {
+//					throw new \Exception("failed to parse line: ". $e->getMessage());
+//				}
 			}
 			$counter++;
 		}
